@@ -1,3 +1,10 @@
+# Compund Layouts
+
+"""
+A layout is compound layouts when layouts are inside the layout
+A Window consisting of combination of layouts
+"""
+
 import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
