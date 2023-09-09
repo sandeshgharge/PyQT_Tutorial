@@ -10,9 +10,6 @@ class DlgMain(QDialog):
         self.setWindowTitle("My GUI")
         self.resize(200,200)
 
-        self.btn = QPushButton("Click", self)
-        self.btn.move(40,40)
-        self.btn.clicked.connect(self.dialogDemo)
     
     def dialogDemo(self):
         return

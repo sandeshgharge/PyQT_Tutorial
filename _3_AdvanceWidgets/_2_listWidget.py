@@ -59,12 +59,21 @@ class DlgMain(QDialog):
         self.resize(200,200)
 
         self.lngLst1 = QListWidget()
-        self.lngLst.addItems(["JAVA", "Python", "C++"])
+        self.lngLst1.addItems(["JAVA", "Python", "C++"])
+        # We can sort item using below method
+        self.lngLst1.sortItems()
+        # To select multiple value below method is used
+        self.lngLst1.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
 
         self.lngLst2 = QListWidget()
 
         self.lr = QPushButton("-->")
+        self.lr.clicked.connect(self.leftToRight)
+        # self.lr.setDisabled(True)
+
         self.rl = QPushButton("<--")
+        self.rl.clicked.connect(self.rightToLeft)
+        # self.rl.setDisabled(True)
 
         self.btn = QPushButton("Confirm")
 
@@ -78,19 +87,40 @@ class DlgMain(QDialog):
         self.l2 = QVBoxLayout()
         self.action = QVBoxLayout()
 
-        self.ws.addWidget(self.l1)
+        self.l1.addWidget(self.lngLst1)
+        self.l2.addWidget(self.lngLst2)
+
+        self.ws.addLayout(self.l1)
         self.ws.addLayout(self.action)
-        self.ws.addWidget(self.l2)
+        self.ws.addLayout(self.l2)
 
         self.ml.addLayout(self.ws)
-        self.ml.addWidget(self.action)
+        self.ml.addWidget(self.btn)
 
         self.action.addStretch()
         self.action.addWidget(self.lr)
         self.action.addWidget(self.rl)
         self.action.addStretch()
 
-        #self.setLayout(slef.)
+        self.setLayout(self.ml)
+        return
+    
+    def leftToRight(self):
+        selectedItems = self.lngLst1.selectedItems()
+        for i in selectedItems:
+            lngItem = self.lngLst1.takeItem(self.lngLst1.row(i))
+            self.lngLst2.addItem(lngItem)
+
+        # In some cases if the changes are not reflecting, repaint is used as below
+        # This case it is working fine so commented
+        # self.repaint()
+
+
+        return
+    
+    def rightToLeft(self):
+
+        # Similar code you can complete it
         return
 
 if __name__ == "__main__":
